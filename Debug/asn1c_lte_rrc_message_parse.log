@@ -1,4 +1,4 @@
-﻿生成启动时间为 2019/6/28 15:05:40。
+﻿生成启动时间为 2019/6/28 15:59:36。
      1>项目“D:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\asn1c_lte_rrc_message_parse.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
@@ -1973,4 +1973,4 @@
 
 生成成功。
 
-已用时间 00:00:08.84
+已用时间 00:00:08.77

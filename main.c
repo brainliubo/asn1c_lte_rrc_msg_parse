@@ -54,7 +54,7 @@ int BCCH_BCH_MESSAGE_ENCODE(int argc,char * argv[])
 
     bch_msg->message.dl_Bandwidth = 5;
     bch_msg->message.phich_Config.phich_Duration = 1; 
-	bch_msg->message.phich_Config.phich_Resource = 2; 
+	bch_msg->message.phich_Config.phich_Resource = 3; 
     bch_msg->message.schedulingInfoSIB1_BR_r13 = 0; 
 	
     bch_msg->message.systemFrameNumber.bits_unused = 0;
