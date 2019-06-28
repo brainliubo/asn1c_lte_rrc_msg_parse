@@ -12,17 +12,24 @@ static int write_out(const void *buffer, size_t size, void *app_key) {
 }
 
 
-int main(int argc, char *argv[])
+
+
+
+
+
+int BCCH_BCH_MESSAGE_ENCODE(int argc,char * argv[])
 {
-	BCCH_BCH_Message_t  *bch_msg; 
+
+    BCCH_BCH_Message_t  *bch_msg; 
 	FILE *fp;
 	asn_enc_rval_t ec; 
 	const char *filename; 
 
     char sfn = 8; 
 	uint16_t *spare = calloc(1, sizeof(uint16_t));
-
-
+	unsigned char buf[1024]; 
+	int  size ; 
+	int i; 
 
 	if(argc < 2) 
 	{
@@ -69,12 +76,89 @@ int main(int argc, char *argv[])
 	} else {
 		printf("ec.encoded = %d bytes\n",ec.encoded); 
 		fprintf(stderr, "Created %s with PER encoded success\n", filename);
-	}
 
-	/* Also print the constructed Rectangle XER encoded (XML) */
-	//xer_fprint(stdout, &asn_DEF_Rectangle, rectangle); //!<
-	asn_fprint(stdout, &asn_DEF_BCCH_BCH_Message, bch_msg);  //!< åœ¨ä¸å®Œå…¨ç¼–ç æ—¶ï¼Œä¹Ÿå¯ä»¥æ‰“å°ï¼Œæ¯”xer_fprintæ›´é€‚åˆäºŽè°ƒè¯?
+		
+		fp = fopen(filename,"rb"); 
+		size = fread(buf, 1, sizeof(buf), fp); 
+		if (size !=0)
+		{
+			printf("encode output byte: ");
+		    for (i = 0; i < size;i++)
+			{
+			   fprintf(stdout,"%x", buf[i]); 
+			}
+			printf("  \n");
+		}
+	}
+	fclose(fp);
+	
+	asn_fprint(stdout, &asn_DEF_BCCH_BCH_Message, bch_msg); 
     system("pause");
 	return 0; /* Encoding finished successfully */
+}
+
+
+int BCCH_BCH_MESSAGE_DECODE(int argc,char * argv[])
+{
+
+    BCCH_BCH_Message_t  *bch_msg = NULL; 
+	FILE *fp;
+	asn_dec_rval_t ec; 
+	const char *filename; 
+    char buf[1024] = {0}; 
+    int size ; 
+
+
+	if(argc < 2) 
+	{
+		fprintf(stderr, "Specify filename for BER output\n");
+	} else 
+	{
+		filename = argv[1];
+		fp = fopen(filename, "rb");
+		/* for BER output */
+		if(!fp) {
+			perror(filename);
+			exit(1);
+	    }
+	}
+
+
+	size = fread(buf, 1, sizeof(buf), fp); //!<å°†æ•°æ®bitä»Žæ–‡ä»¶ä¸­è¯»å…¥åˆ°Bufferä¸­ï¼Œè¿”å›žsize 
+	fclose(fp);
+	if(!size) {
+		fprintf(stderr, "%s: Empty or broken\n", filename);
+		exit(1);
+	}
+
+	
+	
+
+    //!<encode BCH 
+	//!<×¢ÒâÕâÀïµÄµÚËÄ¸ö²ÎÊý£¬ÊÇ£¨void **£©,¶ÔÖ¸ÕëÔÙ&µØÖ·
+    ec = asn_decode(0,ATS_UNALIGNED_BASIC_PER,&asn_DEF_BCCH_BCH_Message, (void **)&bch_msg, buf, size); 
+   
+	fclose(fp);
+	if(ec.code != RC_OK) {
+		fprintf(stderr, "%s: Broken  decoding at byte %ld\n", filename,
+		(long)ec.consumed);
+		exit(1);
+	} else {
+		printf("ec.consumed = %d bytes\n",ec.consumed); 
+		fprintf(stderr, " %s with PER decode success\n", filename);
+	} 
+
+	/* Also print the constructed Rectangle XER encoded (XML) */
+	//xer_fprint(stdout, &asn_DEF_BCCH_BCH_Message, bch_msg); //!<
+    	asn_fprint(stdout, &asn_DEF_BCCH_BCH_Message, bch_msg);  
+    system("pause");
+	return 0; /* Encoding finished successfully */
+}
+
+
+int main(int argc, char *argv[])
+{
+	BCCH_BCH_MESSAGE_ENCODE(argc,argv); 
+	BCCH_BCH_MESSAGE_DECODE(argc,argv);
 
 }
