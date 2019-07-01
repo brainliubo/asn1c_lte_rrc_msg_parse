@@ -1,0 +1,19 @@
+
+int DL_SCH_MESSAGE_ENCODE_SIB_SIB2()
+{
+
+
+
+}
+
+
+int DL_SCH_MESSAGE_DECODE_SIB_SIB2()
+{
+
+
+
+
+
+}
+
+

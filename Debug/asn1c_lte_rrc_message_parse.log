@@ -1,15 +1,16 @@
-﻿生成启动时间为 2019/6/28 15:59:36。
+﻿生成启动时间为 2019/7/1 15:53:11。
      1>项目“D:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Debug\asn1c_lte_rrc_message_parse.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Debug\asn1c_lte_rrc_message_parse.unsuccessfulbuild”执行 Touch 任务。
        ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D ASN_DISABLE_OER_SUPPORT /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
-         main.c
-     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\main.c(40): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D ASN_DISABLE_OER_SUPPORT /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt LTE_SIB_SIB1.c
+         LTE_SIB_SIB1.c
+     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\lte_sib_sib1.c : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\lte_sib_sib1.c(42): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
-     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\main.c(81): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\lte_sib_sib1.c(147): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
-     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\main.c(118): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\vs2010_project\asn1c_lte_rrc_message_parse\asn1c_lte_rrc_message_parse\lte_sib_sib1.c(187): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
        ManifestResourceCompile:
          所有输出均为最新。
@@ -1959,6 +1960,7 @@
          Debug\xer_support.obj
          "Debug\ZeroTxPowerCSI-RS-Conf-r12.obj"
          "Debug\ZeroTxPowerCSI-RS-r12.obj"
+         Debug\LTE_SIB_SIB1.obj
          Debug\main.obj
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\asn1c_lte_rrc_message_parse.exe.embed.manifest" /manifest Debug\asn1c_lte_rrc_message_parse.exe.intermediate.manifest
@@ -1973,4 +1975,4 @@
 
 生成成功。
 
-已用时间 00:00:08.77
+已用时间 00:00:08.26

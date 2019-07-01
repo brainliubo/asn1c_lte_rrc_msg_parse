@@ -1,11 +1,13 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <sys/types.h>
 #include <PHICH-Config.h>
 #include <BCCH-BCH-Message.h>
 
+extern int DL_SCH_MESSAGE_ENCODE_SIB_SIB1(int argc,char * argv[]);
+extern int DL_SCH_MESSAGE_DECODE_SIB_SIB1(int argc,char * argv[]);
 
 /* Write the encoded output into some FILE stream. */
-static int write_out(const void *buffer, size_t size, void *app_key) {
+int write_out(const void *buffer, size_t size, void *app_key) {
 	FILE *out_fp = app_key;
 	size_t wrote = fwrite(buffer, 1, size, out_fp);
 	return (wrote == size) ? 0 : -1;
@@ -66,7 +68,7 @@ int BCCH_BCH_MESSAGE_ENCODE(int argc,char * argv[])
     bch_msg->message.spare.size = 1;
 
     //!<encode BCH 
-    ec = asn_encode(0,ATS_UNALIGNED_BASIC_PER,&asn_DEF_BCCH_BCH_Message, bch_msg, write_out, fp); //两种方式都可�?
+    ec = asn_encode(0,ATS_UNALIGNED_BASIC_PER,&asn_DEF_BCCH_BCH_Message, bch_msg, write_out, fp); //涓ょ鏂瑰紡閮藉彲浠?
    // ec = asn_encode_to_buffer(0,ATS_UNALIGNED_BASIC_PER,&BCCH_BCH_Message_t, bch_msg,encode_buffer,buffersize); 
 	fclose(fp);
 	if(ec.encoded == -1) {
@@ -124,7 +126,7 @@ int BCCH_BCH_MESSAGE_DECODE(int argc,char * argv[])
 	}
 
 
-	size = fread(buf, 1, sizeof(buf), fp); //!<将数据bit从文件中读入到Buffer中，返回size 
+	size = fread(buf, 1, sizeof(buf), fp); //!<灏嗘暟鎹産it浠庢枃浠朵腑璇诲叆鍒癇uffer涓紝杩斿洖size 
 	fclose(fp);
 	if(!size) {
 		fprintf(stderr, "%s: Empty or broken\n", filename);
@@ -135,7 +137,7 @@ int BCCH_BCH_MESSAGE_DECODE(int argc,char * argv[])
 	
 
     //!<encode BCH 
-	//!<ע������ĵ��ĸ��������ǣ�void **��,��ָ����&��ַ
+	//!<注意这里的第四个参数，是（void **）,对指针再&地址
     ec = asn_decode(0,ATS_UNALIGNED_BASIC_PER,&asn_DEF_BCCH_BCH_Message, (void **)&bch_msg, buf, size); 
    
 	fclose(fp);
@@ -147,7 +149,7 @@ int BCCH_BCH_MESSAGE_DECODE(int argc,char * argv[])
 		printf("ec.consumed = %d bytes\n",ec.consumed); 
 		fprintf(stderr, " %s with PER decode success\n", filename);
 	} 
-
+	
 	/* Also print the constructed Rectangle XER encoded (XML) */
 	//xer_fprint(stdout, &asn_DEF_BCCH_BCH_Message, bch_msg); //!<
     	asn_fprint(stdout, &asn_DEF_BCCH_BCH_Message, bch_msg);  
@@ -156,9 +158,13 @@ int BCCH_BCH_MESSAGE_DECODE(int argc,char * argv[])
 }
 
 
+
+
 int main(int argc, char *argv[])
 {
-	BCCH_BCH_MESSAGE_ENCODE(argc,argv); 
-	BCCH_BCH_MESSAGE_DECODE(argc,argv);
+	//BCCH_BCH_MESSAGE_ENCODE(argc,argv); 
+	//BCCH_BCH_MESSAGE_DECODE(argc,argv);
+	DL_SCH_MESSAGE_ENCODE_SIB_SIB1(argc,argv);
+	DL_SCH_MESSAGE_DECODE_SIB_SIB1(argc,argv);
 
 }

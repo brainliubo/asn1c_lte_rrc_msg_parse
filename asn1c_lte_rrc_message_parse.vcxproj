@@ -3970,6 +3970,7 @@
     <ClCompile Include="..\..\36331_r14_test\src\xer_support.c" />
     <ClCompile Include="..\..\36331_r14_test\src\ZeroTxPowerCSI-RS-Conf-r12.c" />
     <ClCompile Include="..\..\36331_r14_test\src\ZeroTxPowerCSI-RS-r12.c" />
+    <ClCompile Include="LTE_SIB_SIB1.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
