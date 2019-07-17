@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asn1c_lte_rrc_message_parse", "asn1c_lte_rrc_message_parse.vcxproj", "{D3236D62-DA4C-4414-9443-4E757C047A98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3236D62-DA4C-4414-9443-4E757C047A98}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D3236D62-DA4C-4414-9443-4E757C047A98}.Debug|Win32.Build.0 = Debug|Win32
+		{D3236D62-DA4C-4414-9443-4E757C047A98}.Release|Win32.ActiveCfg = Release|Win32
+		{D3236D62-DA4C-4414-9443-4E757C047A98}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

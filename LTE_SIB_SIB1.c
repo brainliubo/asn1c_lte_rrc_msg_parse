@@ -90,12 +90,12 @@ int DL_SCH_MESSAGE_ENCODE_SIB_SIB1(int argc,char *argv[])
 	sib1->cellAccessRelatedInfo.trackingAreaCode.bits_unused = 0; 
 	sib1->cellAccessRelatedInfo.trackingAreaCode.size = 2; 
 	//sib1->cellAccessRelatedInfo.cellIdentity 是bit string ,28bit 
-	sib1->cellAccessRelatedInfo.cellIdentity.buf = MALLOC(8); //!<测试一下是否可以是4
+	sib1->cellAccessRelatedInfo.cellIdentity.buf = MALLOC(4); //!<测试一下是否可以是4
 
-	sib1->cellAccessRelatedInfo.cellIdentity.buf[0]=0x00; 
+	sib1->cellAccessRelatedInfo.cellIdentity.buf[0]=0x01; 
 	sib1->cellAccessRelatedInfo.cellIdentity.buf[1]=0x00; 
 	sib1->cellAccessRelatedInfo.cellIdentity.buf[2]=0x00; 
-	sib1->cellAccessRelatedInfo.cellIdentity.buf[3]=0x00; 
+	sib1->cellAccessRelatedInfo.cellIdentity.buf[3]=0x10; 
 
 	sib1->cellAccessRelatedInfo.cellIdentity.size = 4; 
 	sib1->cellAccessRelatedInfo.cellIdentity.bits_unused=4;
@@ -105,11 +105,19 @@ int DL_SCH_MESSAGE_ENCODE_SIB_SIB1(int argc,char *argv[])
 	sib1->cellAccessRelatedInfo.intraFreqReselection = 1; 
 
 	//!<csg identity bit27
-	sib1->cellAccessRelatedInfo.csg_Indication = 0;
-	/*
-	sib1->cellAccessRelatedInfo.csg_Identity = CALLOC(sizeof(CSG_Identity_t),1); 
-    */
+	sib1->cellAccessRelatedInfo.csg_Indication = 1;
+	
+	sib1->cellAccessRelatedInfo.csg_Identity= MALLOC(4);  
+	sib1->cellAccessRelatedInfo.csg_Identity->buf = sib1->cellAccessRelatedInfo.csg_Identity;
+	sib1->cellAccessRelatedInfo.csg_Identity->buf[0]=0x01; 
+	sib1->cellAccessRelatedInfo.csg_Identity->buf[1]=0x02; 
+	sib1->cellAccessRelatedInfo.csg_Identity->buf[2]=0x03; 
+	sib1->cellAccessRelatedInfo.csg_Identity->buf[3]=0x00; 
 
+	sib1->cellAccessRelatedInfo.csg_Identity->size = 4; 
+	sib1->cellAccessRelatedInfo.csg_Identity->bits_unused=5;
+    
+	
 	//!< 
 	sib1->cellSelectionInfo.q_RxLevMin = -40; //~<[-60 ~-13] 
 	sib1->cellSelectionInfo.q_RxLevMinOffset=NULL;  //!<option
@@ -138,6 +146,7 @@ int DL_SCH_MESSAGE_ENCODE_SIB_SIB1(int argc,char *argv[])
 	if(ec.encoded == -1) {
 		fprintf(stderr, "Could not encode SIB1 (at %s)\n",
 		ec.failed_type ? ec.failed_type->name : "unknown");
+		system("pause");
 		exit(1);
 	} else {
 		printf("ec.encoded = %d bytes\n",ec.encoded); 
@@ -148,10 +157,12 @@ int DL_SCH_MESSAGE_ENCODE_SIB_SIB1(int argc,char *argv[])
 		size = fread(buf, 1, sizeof(buf), fp); 
 		if (size !=0)
 		{
-			printf("encode output byte: ");
+			printf("encode output byte: \n");
+		
+			//!<当buf[i] = 0时，其打印省略为0，因此添加0x,并换行
 		    for (i = 0; i < size;i++)
 			{
-			   fprintf(stdout,"%x", buf[i]); 
+			   fprintf(stdout,"%d: 0x%x \n", i, buf[i]); 
 			}
 			printf("  \n");
 		}
